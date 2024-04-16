@@ -43,3 +43,13 @@ def daily_min(data):
     :returns: numpy array with the min inflammation rate of each day"""
     return np.min(data, axis=0)
 
+
+def s_dev(data):
+    """Computes and returns standard deviation for data."""
+    mmm = np.mean(data, axis=0)
+    devs = []
+    for entry in data:
+        devs.append((entry - mmm) * (entry - mmm))
+
+    s_dev = sum(devs) / len(data)
+    return {'standard deviation': s_dev}
