@@ -43,6 +43,13 @@ def daily_min(data):
     :returns: numpy array with the min inflammation rate of each day"""
     return np.min(data, axis=0)
 
+def daily_sd(data):
+    """Calculate the daily standard deviation of a 2D inflammation data array.
+
+    :param data: numpy array with in rows patients and columns the days and in the cells inflammation rates
+    :returns: numpy array with the min inflammation rate of each day"""
+    return np.std(data, axis=0)
+
 def patient_normalise(data):
     """
     Normalise patient data from a 2D inflammation data array.
