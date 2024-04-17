@@ -23,3 +23,15 @@ def visualize(data_dict):
     fig.tight_layout()
 
     plt.show()
+
+def make_line_graph_daily_sd(daily_sd):
+    """Display lineplot of daily sd
+
+    :param daily_sd: np array with daily s.d.
+    """
+    # define data values
+    x = np.arange(len(daily_sd))
+    y = daily_sd  # Y-axis points
+
+    plt.plot(x, y)  # Plot the chart
+    plt.show()  # display

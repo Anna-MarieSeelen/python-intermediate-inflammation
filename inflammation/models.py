@@ -43,13 +43,26 @@ def daily_min(data):
     :returns: numpy array with the min inflammation rate of each day"""
     return np.min(data, axis=0)
 
+def daily_sd(data):
+    """Calculate the daily standard deviation of a 2D inflammation data array.
 
-def s_dev(data):
-    """Computes and returns standard deviation for data."""
-    mmm = np.mean(data, axis=0)
-    devs = []
-    for entry in data:
-        devs.append((entry - mmm) * (entry - mmm))
+    :param data: numpy array with in rows patients and columns the days and in the cells inflammation rates
+    :returns: numpy array with the min inflammation rate of each day"""
+    return np.std(data, axis=0)
 
-    s_dev = sum(devs) / len(data)
-    return {'standard deviation': s_dev}
+def patient_normalise(data):
+    """
+    Normalise patient data from a 2D inflammation data array.
+
+    NaN values are ignored, and normalised to 0.
+
+    Negative values are rounded to 0.
+    """
+    if np.any(data < 0):
+        raise ValueError('Inflammation values should not be negative')
+    max_data = np.nanmax(data, axis=1)
+    with np.errstate(invalid='ignore', divide='ignore'):
+        normalised = data / max_data[:, np.newaxis]
+    normalised[np.isnan(normalised)] = 0
+    normalised[normalised < 0] = 0
+    return normalised
